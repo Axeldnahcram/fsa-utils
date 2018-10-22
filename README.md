@@ -1,0 +1,1 @@
+# FSA-utils : french sentiment analysis
