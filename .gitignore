@@ -15,4 +15,4 @@ wheels/
 .installed.cfg
 *.egg
 
-fler_utils/__pycache__/*
+fsa_utils/__pycache__/*

@@ -1,7 +1,7 @@
 # coding: utf-8
 """
-.. module:: fler_utils.constants
-Constants module for fler utilities
+.. module:: fsa_utils.constants
+Constants module for fsa utilities
 """
 
 __author__ = "Axel Marchand"
@@ -17,6 +17,7 @@ CSV_ROOT = "csv_root"
 TXT_ROOT = "txt_root"
 JSON_ROOT = "json_root"
 TRAININGDATASETS_ROOT = "trainingdatasets_root"
+HTML_ROOT = "html_root"
 API_CONFIGURATION = "api_configuration"
 REDIS_URL = "redis_url"
 PG_DSN = "pg_dsn"

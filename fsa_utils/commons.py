@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 """
-.. module:: albator-utils commons
+.. module:: fsa-utils commons
 Common function to retrieve the file content
 """
 
@@ -20,7 +20,7 @@ import aiofiles
 # custom
 import sys
 import os
-import fler_utils.constants as cst
+import fsa_utils.constants as cst
 import asyncio
 
 LOGGER = logzero.logger
@@ -34,6 +34,7 @@ def get_asset_root() -> Dict[str, str]:
     pkl_root = str(pathlib.PurePath(dir, 'ext_files/pkl'))
     csv_root = str(pathlib.PurePath(dir, 'ext_files/csv'))
     txt_root = str(pathlib.PurePath(dir, 'ext_files/txt'))
+    html_root = str(pathlib.PurePath(dir, 'ext_files/html'))
     gazetteer_en_root = str(pathlib.PurePath(dir, 'ext_files/csv/Gazetteer_ENG'))
     gazetteer_fr_root = str(pathlib.PurePath(dir, 'ext_files/csv/Gazetteer_FR'))
     json_root = str(pathlib.PurePath(dir, 'ext_files/json/'))
@@ -46,6 +47,7 @@ def get_asset_root() -> Dict[str, str]:
     dict["gazetteer_fr_root"] = gazetteer_fr_root
     dict["json_root"] = json_root
     dict["trainingdatasets_root"] = trainingdatasets_root
+    dict['html_root']= html_root
 
     return dict
 
@@ -79,6 +81,14 @@ def get_file_content(cfg, name, gaztype = None):
         LOGGER.info(txt_file)
         if os.path.isfile(txt_file):
             return txt_file
+    if cst.HTML_ROOT in cfg:
+        root_folder = cfg.get(cst.HTML_ROOT)
+        LOGGER.info(root_folder)
+        html_file = f"{root_folder}/{name}.html"
+        LOGGER.info(html_file)
+        if os.path.isfile(html_file):
+            return html_file
+
     if name == 'gazetteer_en':
         root_folder = cfg.get('gazetteer_en_root')
         ret = []
@@ -136,9 +146,7 @@ def get_pg_dsn() -> str:
     """
     load_dotenv(find_dotenv())
     # ret = "dbname=postgres user=postgres host=127.0.0.1 port=54320"
-    ret = "dbname=albator user=albator password=albatorpwd host=localhost port=54320"
-    if cst.PG_DSN in os.environ:
-        ret = os.environ[cst.PG_DSN]
+    ret = "dbname=fsa user=fsa password=fsapwd host=localhost port=54321"
     return ret
 
 
@@ -191,4 +199,4 @@ async def get_configuration() -> Dict[str, str]:
 
 if __name__ == "__main__":
     f = get_asset_root()
-    LOGGER.info(get_file_content(f, "gazetteer_fr", "LOC"))
+    LOGGER.info(f)
